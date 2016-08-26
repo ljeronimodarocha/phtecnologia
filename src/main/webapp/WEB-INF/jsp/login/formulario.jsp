@@ -20,9 +20,9 @@
 		
 		
 		<form action='<c:url value='/login/autentica' />'method="post" >
-			Nome <input type="text" name="login.nome" value="${login.nome}"/>
-			Senha <input type="text" name="login.senha" value="${login.senha}">
-			<input type="button" value="login">
+			Nome <input type="text" name="usuario.nome" value="${usuario.nome}"/>
+			Senha <input type="password" name="usuario.senha" value="${usuario.senha}">
+			<input type="submit"  value="login" name="loga">
 		</form>
 </body>
 </html>
