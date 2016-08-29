@@ -20,25 +20,28 @@ public class ChamadoController {
 	private final Result result;
 	private final ChamadoDao dao;
 	private final Validator validator;
+	private final UsuarioLogado user;
 
 	@Inject
-	public ChamadoController(Result result, ChamadoDao dao, Validator validator) {
+	public ChamadoController(Result result, ChamadoDao dao, Validator validator, UsuarioLogado user) {
 		this.result = result;
 		this.dao = dao;
 		this.validator = validator;
+		this.user = user;
 	}
 
 	@Deprecated
 	public ChamadoController() {
-		this(null, null, null);
+		this(null, null, null, null);
 	}
 
 
 	@Path("/chamado/cadastra")@Post
 	public void adiciona(Chamado chamado) {
 //		validator.onErrorUsePageOf(this).formulario();
-		System.out.println(chamado);
-		dao.adiciona(chamado);
+		System.out.println(user.getUser().getId());
+		chamado.setUsuario(user.getUser());
+//		dao.adiciona(chamado);
 		result.redirectTo(IndexController.class).inicio();
 	}
 	@Get("/formulario")

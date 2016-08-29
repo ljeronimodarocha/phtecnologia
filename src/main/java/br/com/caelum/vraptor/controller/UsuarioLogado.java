@@ -14,11 +14,13 @@ public class UsuarioLogado implements Serializable {
 
 	private Usuario user;
 
-	public Usuario getUsuario() {
+	public Usuario getUser() {
 		return user;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.user = usuario;
+	public void setUser(Usuario user) {
+		this.user = user;
 	}
+
+	
 }

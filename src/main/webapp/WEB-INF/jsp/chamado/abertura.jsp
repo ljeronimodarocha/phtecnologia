@@ -22,7 +22,6 @@
 	</header>
 	<div class="content">
 	<div class="box">
-		<h1>Seja bem Vindo ${usuarioLogado.usuario.nome}</h1>
 		<form action="<c:url value='/chamado/cadastra'/>" method="post">
 			<label for="nome">Nome: <input class="form-control" id="nome" type="text" name="chamado.nome" value="${chamado.nome}" /></label><br> 
 			<label for="setor">Setor: <input class="form-control" id="setor" type="text" name="chamado.setor" value="${chamado.setor}"/></label><br> 

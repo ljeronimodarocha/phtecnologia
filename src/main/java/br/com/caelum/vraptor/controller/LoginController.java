@@ -3,6 +3,9 @@ package br.com.caelum.vraptor.controller;
 import java.io.Serializable;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
@@ -40,13 +43,12 @@ public class LoginController{
 
    @Post("/login/autentica")
     public void autentica(Usuario usuario) {
-		
         if(!dao.existe(usuario)){
             validator.add(new I18nMessage("login", "login.invalido"));
             validator.onErrorUsePageOf(this).formulario();
         	result.redirectTo(ChamadoController.class).abertura();
-        }    	
-        usuarioLogado.setUsuario(usuario);
+        }
+        usuarioLogado.setUser(usuario);
         result.redirectTo(ChamadoController.class).abertura();
     }    
 }
