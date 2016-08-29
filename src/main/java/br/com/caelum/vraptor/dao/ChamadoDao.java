@@ -11,25 +11,14 @@ import br.com.caelum.vraptor.model.Chamado;
 @RequestScoped
 public class ChamadoDao {
 
-	private final EntityManager em;
-
 	@Inject
-	public ChamadoDao(EntityManager em) {
-		this.em = em;
-	}
-
-	@Deprecated
-	ChamadoDao() {
-		this(null); // para uso do CDI
-	}
+	private EntityManager em;
 
 	public void adiciona(Chamado produto) {
 		em.getTransaction().begin();
 		em.persist(produto);
 		em.getTransaction().commit();
 	}
-
-	
 
 	public void busca(Chamado produto) {
 		em.find(Chamado.class, produto.getId());

@@ -10,42 +10,35 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.annotations.Public;
 import br.com.caelum.vraptor.dao.UsuarioDao;
 import br.com.caelum.vraptor.model.Usuario;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
 
-
 @Controller
-public class LoginController{
+public class LoginController {
 
-    private final UsuarioDao dao;
-    private final Result result;
-    private final Validator validator;
+	@Inject
+	private UsuarioDao dao;
+	@Inject
+	private Result result;
+	@Inject
+	private Validator validator;
 
-    @Inject
-    public LoginController(UsuarioDao dao, Result result, Validator validator) {
-        this.dao = dao;
-        this.result = result;
-        this.validator = validator;
-    }
+	@Get("/login/formulario")
+	@Public
+	public void formulario() {
+	}
 
-    @Deprecated
-    LoginController() {
-        this(null, null, null); // para uso do CDI
-    }
-//
-    @Get("/login/formulario")
-    public void formulario() {
-    }
-
-   @Post("/login/autentica")
-    public void autentica(Usuario usuario) {
-        if(!dao.existe(usuario)){
-            validator.add(new I18nMessage("login", "login.invalido"));
-            validator.onErrorUsePageOf(this).formulario();
-        	result.redirectTo(ChamadoController.class).abertura();
-        }
-        result.redirectTo(ChamadoController.class).abertura();
-    }    
+	@Post("/login/autentica")
+	@Public
+	public void autentica(Usuario usuario) {
+		if (!dao.existe(usuario)) {
+			validator.add(new I18nMessage("login", "login.invalido"));
+			validator.onErrorUsePageOf(this).formulario();
+			result.redirectTo(ChamadoController.class).abertura();
+		}
+		result.redirectTo(ChamadoController.class).abertura();
+	}
 }
