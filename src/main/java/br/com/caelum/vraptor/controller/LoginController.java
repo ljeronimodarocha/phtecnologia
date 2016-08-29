@@ -22,19 +22,17 @@ public class LoginController{
     private final UsuarioDao dao;
     private final Result result;
     private final Validator validator;
-    private final UsuarioLogado usuarioLogado;
 
     @Inject
-    public LoginController(UsuarioDao dao, Result result, Validator validator, UsuarioLogado usuarioLogado) {
+    public LoginController(UsuarioDao dao, Result result, Validator validator) {
         this.dao = dao;
         this.result = result;
         this.validator = validator;
-        this.usuarioLogado = usuarioLogado;
     }
 
     @Deprecated
     LoginController() {
-        this(null, null, null, null); // para uso do CDI
+        this(null, null, null); // para uso do CDI
     }
 //
     @Get("/login/formulario")
@@ -48,7 +46,6 @@ public class LoginController{
             validator.onErrorUsePageOf(this).formulario();
         	result.redirectTo(ChamadoController.class).abertura();
         }
-        usuarioLogado.setUser(usuario);
         result.redirectTo(ChamadoController.class).abertura();
     }    
 }

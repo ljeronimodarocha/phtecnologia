@@ -41,7 +41,7 @@ public class ChamadoController {
 //		validator.onErrorUsePageOf(this).formulario();
 		System.out.println(user.getUser().getId());
 		chamado.setUsuario(user.getUser());
-//		dao.adiciona(chamado);
+		dao.adiciona(chamado);
 		result.redirectTo(IndexController.class).inicio();
 	}
 	@Get("/formulario")
