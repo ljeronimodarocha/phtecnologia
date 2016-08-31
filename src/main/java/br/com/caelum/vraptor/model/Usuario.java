@@ -7,18 +7,21 @@ import javax.persistence.Id;
 @Entity
 public class Usuario {
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long id;
-	
+
 	private String nome;
 	private String senha;
+	private String email;
 
 	public Usuario() {
 	}
-	
-	public Usuario(String nome, String senha) {
+
+	public Usuario(String nome, String senha, String email) {
 		this.nome = nome;
 		this.senha = senha;
+		this.email = email;
 	}
 
 	public String getNome() {
@@ -44,5 +47,12 @@ public class Usuario {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
