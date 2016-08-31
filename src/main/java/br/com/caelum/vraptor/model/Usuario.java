@@ -3,6 +3,9 @@ package br.com.caelum.vraptor.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Usuario {
@@ -10,8 +13,10 @@ public class Usuario {
 	@Id
 	@GeneratedValue
 	private Long id;
-
+	
+	@NotEmpty@Size(min=3, message="{usuario.nome.minimo}")
 	private String nome;
+	@NotEmpty@Size(min=3, message="{usuario.senha.minimo}")
 	private String senha;
 	private String email;
 

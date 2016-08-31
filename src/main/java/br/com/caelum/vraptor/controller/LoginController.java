@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
@@ -33,7 +34,7 @@ public class LoginController {
 
 	@Post("/login/autentica")
 	@Public
-	public void autentica(Usuario usuario) {
+	public void autentica(@Valid Usuario usuario) {
 		if (!dao.existe(usuario)) {
 			validator.add(new I18nMessage("login", "login.invalido"));
 			validator.onErrorUsePageOf(this).formulario();

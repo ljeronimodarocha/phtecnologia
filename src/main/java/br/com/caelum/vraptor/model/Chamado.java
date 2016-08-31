@@ -16,24 +16,24 @@ public class Chamado {
 	@Id
 	private Long id;
 
-	// @NotEmpty
-	// @Size(min = 3)
+	@NotEmpty
+	@Size(min = 0, message = "{chamado.nome}")
 	private String nome;
-	//
-	// @NotEmpty
-	// @Size(min = 3)
+
+	@NotEmpty
+	@Size(min = 0, message = "{chamado.setor}")
 	private String setor;
 	//
-	// @NotEmpty
-	// @Size(min = 3)
+	@NotEmpty
+	@Size(min = 0, message = "{chamado.tipo}")
 	private String tipo;
-	//
-	// @NotEmpty
-	// @Size(min = 3)
+
+	@NotEmpty
+	@Size(min = 0, message = "{chamado.problema}")
 	private String problema;
 
-	// @NotEmpty
-	// @Size(min = 3)
+	@NotEmpty
+	@Size(min = 0, message = "{chamado.necessidade}")
 	private String necessidade;
 
 	@ManyToOne

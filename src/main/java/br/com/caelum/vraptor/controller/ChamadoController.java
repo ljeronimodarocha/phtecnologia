@@ -36,10 +36,13 @@ public class ChamadoController {
 
 	@Post("/chamado/cadastra")
 	@Public
-	public void adiciona(Chamado chamado) {
-		// validator.onErrorUsePageOf(this).formulario();
-		System.out.println(user.getUser().getId());
+	public void adiciona(@Valid Chamado chamado) {
 		chamado.setUsuario(user.getUser());
+		if(validator.hasErrors()){
+		validator.add(new I18nMessage("Chamado", "chamado.invalido"));
+		 validator.onErrorUsePageOf(this).abertura();
+		 result.redirectTo(this).abertura();
+		}
 		dao.adiciona(chamado);
 		try {
 			enviaPedidoDeNovosItens(chamado);
