@@ -40,8 +40,7 @@ public class ChamadoController {
 		chamado.setUsuario(user.getUser());
 		if(validator.hasErrors()){
 		validator.add(new I18nMessage("Chamado", "chamado.invalido"));
-		 validator.onErrorUsePageOf(this).abertura();
-		 result.redirectTo(this).abertura();
+		validator.onErrorRedirectTo(this).abertura();
 		}
 		dao.adiciona(chamado);
 		try {

@@ -1,34 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>PH Tecnologia</title>
-<link rel="stylesheet" type="text/css" href="css/estilo.css">
-</head>
-<body>
-
-	<li><a href="<c:url value='/'/>"> Home </a></li>
-	<li><a href="<c:url value='/formulario'/>"> Abertura de
-			Chamado </a></li>
-	<li><a href="<c:url value='/chamado/formulario'/>">
-			Acompanhamento do chamado </a></li>
-	<li><a href="<c:url value='/login/formulario' />"> Login </a></li>
-	</ul>
-
-
-	<form action='<c:url value='/login/autentica' />' method="post">
-		Nome <input type="text" name="usuario.nome" value="${usuario.nome}" />
-		Senha <input type="password" name="usuario.senha"
-			value="${usuario.senha}"> <input type="submit" value="login"
-			name="loga">
-	</form>
-	<c:if test="${not empty errors}">
+<c:import url="/WEB-INF/cabecalho/header.jsp" />
+<div class="content">
+	<div class="box">
+		<form action='<c:url value='/login/autentica' />' method="post">
+			Nome <input type="text" name="usuario.nome" value="${usuario.nome}" /><br>
+			Senha <input type="password" name="usuario.senha"
+				value="${usuario.senha}"><br> <input type="submit" value="logar"
+				name="loga">
+		</form>
+		<c:if test="${not empty errors}">
 			<c:forEach var="error" items="${errors}">
-                    ${error.category} - ${error.message}<br />
+                    ${error.category} - ${error.message}<br>
 			</c:forEach>
-	</c:if>
-</body>
-</html>
+		</c:if>
+	</div>
+</div>
+<c:import url="/WEB-INF/cabecalho/footer.jsp" />
