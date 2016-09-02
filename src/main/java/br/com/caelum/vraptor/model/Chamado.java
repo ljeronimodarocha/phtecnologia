@@ -1,5 +1,7 @@
 package br.com.caelum.vraptor.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -39,6 +41,10 @@ public class Chamado {
 	@ManyToOne
 	@JoinColumn(referencedColumnName = "id", name = "id_Usuario")
 	private Usuario usuario;
+	
+	private Date data_abertura;
+	
+	private Date data_fechamento;
 
 	public Chamado() {
 	}
@@ -107,5 +113,21 @@ public class Chamado {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Date getData_abertura() {
+		return data_abertura;
+	}
+
+	public void setData_abertura(Date data_abertura) {
+		this.data_abertura = data_abertura;
+	}
+
+	public Date getData_fechamento() {
+		return data_fechamento;
+	}
+
+	public void setData_fechamento(Date data_fechamento) {
+		this.data_fechamento = data_fechamento;
 	}
 }

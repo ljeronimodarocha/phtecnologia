@@ -1,5 +1,7 @@
 package br.com.caelum.vraptor.controller;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -9,7 +11,6 @@ import org.apache.commons.mail.SimpleEmail;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.annotations.Public;
@@ -18,7 +19,6 @@ import br.com.caelum.vraptor.model.Chamado;
 import br.com.caelum.vraptor.simplemail.Mailer;
 import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.Validator;
-import br.com.caelum.vraptor.view.Results;
 
 @Controller
 public class ChamadoController {
@@ -37,9 +37,11 @@ public class ChamadoController {
 	@Post("/chamado/cadastra")
 	@Public
 	public void adiciona(@Valid Chamado chamado) {
+		Date data_abertura = new Date();
 		chamado.setUsuario(user.getUser());
+		chamado.setData_abertura(data_abertura);
 		if(validator.hasErrors()){
-		validator.add(new I18nMessage("Chamado", "chamado.invalido"));
+		validator.add(new I18nMessage("chamado", "chamado.invalido"));
 		validator.onErrorRedirectTo(this).abertura();
 		}
 		dao.adiciona(chamado);
@@ -64,9 +66,14 @@ public class ChamadoController {
 		email.setSubject("Efetuada a abertura de chamado, número: " + chamado.getId());
 //		email.addTo("pedro@phtecnologia.com.br");
 		email.addTo(user.getUser().getEmail());
-		email.setMsg("Chamado aberto pelo usuário " + chamado.getNome() + ", tipo do chamado: " + chamado.getTipo() + 
-				", problema informado no chamado: " + chamado.getProblema() + ", necessidade do chamado: " + chamado.getNecessidade());
+		email.setMsg("Chamado aberto pelo usuário " + chamado.getNome() +  ", tipo do chamado: " + chamado.getTipo() + 
+					", problema informado no chamado: " + chamado.getProblema() + ", necessidade do chamado: " + chamado.getNecessidade());
 		mailer.send(email);
+	}
+	
+	@Get("/chamado/formulario_busca")
+	public void formulario_busca(){
+		
 	}
 
 }

@@ -8,11 +8,13 @@
 				value="${usuario.senha}"><br> <input type="submit" value="logar"
 				name="loga">
 		</form>
-		<c:if test="${not empty errors}">
-			<c:forEach var="error" items="${errors}">
+		<div class="erro">
+			<c:if test="${not empty errors}">
+				<c:forEach var="error" items="${errors}">
                     ${error.category} - ${error.message}<br>
-			</c:forEach>
-		</c:if>
+				</c:forEach>
+			</c:if>
+		</div>
 	</div>
 </div>
 <c:import url="/WEB-INF/cabecalho/footer.jsp" />

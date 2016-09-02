@@ -82,3 +82,7 @@ input, .necessidade{
 	border: solid #d1cfcf 1px;
 	margin: 5px 0;
 }
+.erro{
+	font-family: 'line-bold',sans-serif;
+	font-weight: bold;
+}
