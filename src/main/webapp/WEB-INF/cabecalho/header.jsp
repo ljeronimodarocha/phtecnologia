@@ -20,7 +20,7 @@
 			<li><a href="<c:url value='/' />" title="Inicio">Home</a></li>
 			<li><a href="<c:url value='/formulario' />"
 				title="Clique para gerar um novo chamado">Abertura de Chamado</a></li>
-			<li><a href="#" title="Status de chamados gerados no sistema">Acompanhamento
+			<li><a href="<c:url value='/chamado/formularioBusca'/>" title="Status de chamados gerados no sistema">Acompanhamento
 					do Chamado</a></li>
 			<li><a href='<c:url value='/login/formulario' />'
 				title="Login no sistema">Login</a></li>

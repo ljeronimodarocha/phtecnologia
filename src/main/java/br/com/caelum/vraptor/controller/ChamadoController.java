@@ -1,6 +1,7 @@
 package br.com.caelum.vraptor.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -51,7 +52,8 @@ public class ChamadoController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		result.redirectTo(IndexController.class).inicio();
+		result.include("Conclido", "chamado.concluido");
+		result.redirectTo(this).formularioBusca();
 	}
 
 	@Get("/formulario")
@@ -71,9 +73,20 @@ public class ChamadoController {
 		mailer.send(email);
 	}
 	
-	@Get("/chamado/formulario_busca")
-	public void formulario_busca(){
-		
+	@Get("/chamado/formularioBusca")
+	public void formularioBusca(){
+
+	}
+	
+	@Public
+	@Post("/chamado/busca")	
+	public void busca(Chamado chamado){
+		if(chamado.getId() == null){
+			result.include("chamadoLista", dao.lista(user.getUser()));
+			result.redirectTo(this).formularioBusca();
+		}
+		result.include("chamadoLista" , dao.busca(chamado.getId(), user.getUser()));
+		result.redirectTo(this).formularioBusca();
 	}
 
 }

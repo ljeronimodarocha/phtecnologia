@@ -24,11 +24,9 @@
 				name="cadastra" value="Efetuar Cadastro">
 		</form>
 			<div class="erro">
-				<c:if test="${not empty errors}">
 					<c:forEach var="error" items="${errors}">
                     	${error.category} - ${error.message}<br>
 					</c:forEach>
-				</c:if>
 			</div>
 		</div>
 </div>

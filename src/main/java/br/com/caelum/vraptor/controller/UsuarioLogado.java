@@ -8,6 +8,7 @@ import javax.inject.Named;
 import br.com.caelum.vraptor.model.Usuario;
 
 
+@SuppressWarnings("serial")
 @SessionScoped
 @Named
 public class UsuarioLogado implements Serializable {
