@@ -41,9 +41,9 @@ public class ChamadoController {
 		Date data_abertura = new Date();
 		chamado.setUsuario(user.getUser());
 		chamado.setData_abertura(data_abertura);
-		if(validator.hasErrors()){
-		validator.add(new I18nMessage("chamado", "chamado.invalido"));
-		validator.onErrorRedirectTo(this).abertura();
+		if (validator.hasErrors()) {
+			validator.add(new I18nMessage("chamado", "chamado.invalido"));
+			validator.onErrorRedirectTo(this).abertura();
 		}
 		dao.adiciona(chamado);
 		try {
@@ -66,27 +66,28 @@ public class ChamadoController {
 	public void enviaPedidoDeNovosItens(Chamado chamado) throws EmailException {
 		Email email = new SimpleEmail();
 		email.setSubject("Efetuada a abertura de chamado, número: " + chamado.getId());
-//		email.addTo("pedro@phtecnologia.com.br");
+		// email.addTo("pedro@phtecnologia.com.br");
 		email.addTo(user.getUser().getEmail());
-		email.setMsg("Chamado aberto pelo usuário " + chamado.getNome() +  ", tipo do chamado: " + chamado.getTipo() + 
-					", problema informado no chamado: " + chamado.getProblema() + ", necessidade do chamado: " + chamado.getNecessidade());
+		email.setMsg("Chamado aberto pelo usuário " + chamado.getNome() + ", tipo do chamado: " + chamado.getTipo()
+				+ ", problema informado no chamado: " + chamado.getProblema() + ", necessidade do chamado: "
+				+ chamado.getNecessidade());
 		mailer.send(email);
 	}
-	
+
 	@Get("/chamado/formularioBusca")
-	public void formularioBusca(){
+	public void formularioBusca() {
 
 	}
-	
+
 	@Public
-	@Post("/chamado/busca")	
-	public void busca(Chamado chamado){
-		if(chamado.getId() == null){
+	@Post("/chamado/busca")
+	public void busca(Chamado chamado) {
+		if (chamado.getId() == 9999) {
 			result.include("chamadoLista", dao.lista(user.getUser()));
 			result.redirectTo(this).formularioBusca();
+		} else {
+			result.include("chamadoLista", dao.busca(chamado.getId(), user.getUser()));
+			result.redirectTo(this).formularioBusca();
 		}
-		result.include("chamadoLista" , dao.busca(chamado.getId(), user.getUser()));
-		result.redirectTo(this).formularioBusca();
 	}
-
 }
