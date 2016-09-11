@@ -1,8 +1,6 @@
 package br.com.caelum.vraptor.controller;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -82,12 +80,15 @@ public class ChamadoController {
 	@Public
 	@Post("/chamado/busca")
 	public void busca(Chamado chamado) {
-		if (chamado.getId() == 9999) {
+		chamado.setNome("lucas");
+		if(chamado.getId() == null){
 			result.include("chamadoLista", dao.lista(user.getUser()));
 			result.redirectTo(this).formularioBusca();
+			System.out.println("Método lista é chamado aqui");
 		} else {
 			result.include("chamadoLista", dao.busca(chamado.getId(), user.getUser()));
 			result.redirectTo(this).formularioBusca();
+			System.out.println("Método busca é chamado aqui");
 		}
 	}
 }

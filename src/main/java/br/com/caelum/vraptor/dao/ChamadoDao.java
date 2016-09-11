@@ -29,7 +29,7 @@ public class ChamadoDao {
 	}
 
 	public List lista(Usuario usuario){
-		return em.createQuery("select c from chamado where c.usuario.id=" + usuario.getId()).getResultList();
+		return em.createQuery("select c from Chamado c where c.usuario.id=" + usuario.getId()).getResultList();
 	}
 	
 }
