@@ -50,12 +50,6 @@
 		</table>
 	</div>
 </div>
-<script type="text/javascript">
-	
-	function teste(valor) {
-		window.location.href = "<"
-		alert('Concluido fechamento do chamado!');
-	}
-</script>
+
 
 <c:import url="/WEB-INF/cabecalho/footer.jsp" />
