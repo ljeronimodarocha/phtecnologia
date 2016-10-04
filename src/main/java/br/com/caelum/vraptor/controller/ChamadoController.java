@@ -37,8 +37,8 @@ public class ChamadoController {
 	@Public
 	public void adiciona(@Valid Chamado chamado) {
 		Date data_abertura = new Date();
-		chamado.setUsuario(user.getUser());
 		chamado.setData_abertura(data_abertura);
+		chamado.setUsuario(user.getUser());
 		if (validator.hasErrors()) {
 			validator.add(new I18nMessage("chamado", "chamado.invalido"));
 			validator.onErrorRedirectTo(this).abertura();
@@ -77,18 +77,29 @@ public class ChamadoController {
 
 	}
 
-	@Public
 	@Post("/chamado/busca")
+	@Public
 	public void busca(Chamado chamado) {
-		chamado.setNome("lucas");
-		if(chamado.getId() == null){
-			result.include("chamadoLista", dao.lista(user.getUser()));
-			result.redirectTo(this).formularioBusca();
-			System.out.println("Método lista é chamado aqui");
+		if (user.getUser() != null) {
+			if (chamado.getId() == null) {
+				result.include("chamadoLista", dao.lista(user.getUser()));
+				result.redirectTo(this).formularioBusca();
+				System.out.println("Método lista é chamado aqui");
+			} else {
+				result.include("chamadoLista", dao.busca(chamado.getId(), user.getUser()));
+				result.redirectTo(this).formularioBusca();
+				System.out.println("Método busca é chamado aqui");
+			}
 		} else {
-			result.include("chamadoLista", dao.busca(chamado.getId(), user.getUser()));
-			result.redirectTo(this).formularioBusca();
-			System.out.println("Método busca é chamado aqui");
+			result.redirectTo(LoginController.class).formulario();
 		}
+	}
+
+	@Post("/chamado/encerra")
+	public void fecha(Chamado chamado) {
+		System.out.println(chamado.getId());
+		dao.encerra(chamado);
+		result.include("chamadoLista", dao.lista(user.getUser()));
+		result.redirectTo(this).formularioBusca();
 	}
 }

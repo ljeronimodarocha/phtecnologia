@@ -45,6 +45,8 @@ public class Chamado {
 	private Date data_abertura;
 	
 	private Date data_fechamento;
+	
+	private String estado;
 
 	public Chamado() {
 	}
@@ -129,5 +131,13 @@ public class Chamado {
 
 	public void setData_fechamento(Date data_fechamento) {
 		this.data_fechamento = data_fechamento;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 }
