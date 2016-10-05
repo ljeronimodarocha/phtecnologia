@@ -32,7 +32,7 @@
 			</tr>
 			<c:forEach items="${chamadoLista}" var="chamado">
 				<c:if test="${not empty chamado}">
-					<tr>
+					<tr onclick="teste(${chamado.id})">
 						<td>${chamado.nome}</td>
 						<td>${chamado.setor}</td>
 						<td>${chamado.tipo}</td>
@@ -50,6 +50,11 @@
 		</table>
 	</div>
 </div>
-
+<script type="text/javascript">
+	function teste(id) {
+		window.location.href = "../observacao/formularioObs";
+		sessionStorage.setItem('id', id);
+	}
+</script>
 
 <c:import url="/WEB-INF/cabecalho/footer.jsp" />

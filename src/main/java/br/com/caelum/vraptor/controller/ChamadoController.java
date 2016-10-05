@@ -45,7 +45,7 @@ public class ChamadoController {
 		}
 		dao.adiciona(chamado);
 		try {
-			enviaPedidoDeNovosItens(chamado);
+			enviarEmail(chamado);
 		} catch (EmailException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +61,7 @@ public class ChamadoController {
 
 	@Get
 	@Public
-	public void enviaPedidoDeNovosItens(Chamado chamado) throws EmailException {
+	public void enviarEmail(Chamado chamado) throws EmailException {
 		Email email = new SimpleEmail();
 		email.setSubject("Efetuada a abertura de chamado, número: " + chamado.getId());
 		// email.addTo("pedro@phtecnologia.com.br");
