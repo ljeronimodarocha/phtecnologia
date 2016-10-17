@@ -28,11 +28,13 @@
 
 				<th>Estado do chamado</th>
 
+				<th>Observação</th>
+
 				<th>Encerrar chamado</th>
 			</tr>
 			<c:forEach items="${chamadoLista}" var="chamado">
 				<c:if test="${not empty chamado}">
-					<tr onclick="teste(${chamado.id})">
+					<tr>
 						<td>${chamado.nome}</td>
 						<td>${chamado.setor}</td>
 						<td>${chamado.tipo}</td>
@@ -40,9 +42,15 @@
 						<td>${chamado.necessidade}</td>
 						<td>${chamado.estado}</td>
 						<td><c:if test="${chamado.estado != 'Fechado'}">
-							<form action='<c:url value="/chamado/encerra"/>' method="post">
-								<button type="submit" value="${chamado.id}" name="chamado.id">Fechar o Chamado</button>
-							</form>
+								<form action='<c:url value="/observacao/formularioObs"/>' method="post">
+									<button type="submit" value="${chamado.id}" name="observacao.chamado.id">Observação</button>
+								</form>
+							</c:if></td>
+						<td><c:if test="${chamado.estado != 'Fechado'}">
+								<form action='<c:url value="/chamado/encerra"/>' method="post">
+									<button type="submit" value="${chamado.id}" name="chamado.id">Fechar
+										o Chamado</button>
+								</form>
 							</c:if></td>
 					</tr>
 				</c:if>
@@ -50,11 +58,4 @@
 		</table>
 	</div>
 </div>
-<script type="text/javascript">
-	function teste(id) {
-		window.location.href = "../observacao/formularioObs";
-		sessionStorage.setItem('id', id);
-	}
-</script>
-
 <c:import url="/WEB-INF/cabecalho/footer.jsp" />
