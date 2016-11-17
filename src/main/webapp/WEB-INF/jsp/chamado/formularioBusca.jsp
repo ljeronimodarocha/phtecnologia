@@ -45,6 +45,10 @@
 								<form action='<c:url value="/observacao/formularioObs"/>' method="post">
 									<button type="submit" value="${chamado.id}" name="observacao.chamado.id">Observação</button>
 								</form>
+							</c:if><c:if test="${chamado.estado == 'Fechado'}">
+									<form action='<c:url value="/observacao/visualiza"/>' method="post">
+											<button type="submit" value="${chamado.id}" name="observacao.chamado.id">Visualizar</button>
+									</form>
 							</c:if></td>
 						<td><c:if test="${chamado.estado != 'Fechado'}">
 								<form action='<c:url value="/chamado/encerra"/>' method="post">

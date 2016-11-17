@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,7 +17,7 @@ public class Observacao {
 	private Usuario usuario;
 	@ManyToOne
 	private Chamado chamado;
-
+	@Size(min = 0, message = "{observacao.observacao}")
 	private String observacao;
 
 	public Long getId() {

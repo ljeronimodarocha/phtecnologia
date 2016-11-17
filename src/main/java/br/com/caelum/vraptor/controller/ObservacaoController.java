@@ -1,6 +1,7 @@
 package br.com.caelum.vraptor.controller;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -13,6 +14,8 @@ import br.com.caelum.vraptor.annotations.Public;
 import br.com.caelum.vraptor.dao.ObservacaoDao;
 import br.com.caelum.vraptor.model.Observacao;
 import br.com.caelum.vraptor.simplemail.Mailer;
+import br.com.caelum.vraptor.validator.I18nMessage;
+import br.com.caelum.vraptor.validator.Validator;
 
 @Controller
 public class ObservacaoController {
@@ -24,21 +27,24 @@ public class ObservacaoController {
 	private Result result;
 	@Inject
 	private Mailer mailer;
-	
-	
-	
-	
+	@Inject
+	private Validator validator;
 	
 	
 	@Post("/observacao/formularioObs")
 	public void formulario(Observacao observacao){
 		observacao.setUsuario(user.getUser());
 		result.include("obs", observacao);
+		result.include("teste" , dao.buscaObs(observacao));
 		
 	}
 	@Public
 	@Post("/observacao/adiciona")
-	public void adiciona(Observacao observacao){
+	public void adiciona(@Valid Observacao observacao){
+		if(validator.hasErrors()){
+			validator.add(new I18nMessage("observacao", "observacao.observacao"));
+			validator.onErrorRedirectTo(this).formulario(observacao);
+		}
 		observacao.setUsuario(user.getUser());
 		System.out.println(observacao.getChamado().getId());
 		System.out.println(observacao.getObservacao());
@@ -64,6 +70,12 @@ public class ObservacaoController {
 		email.setMsg("Observação adicionada ao chamado: " + observacao.getObservacao());
 		mailer.send(email);
 		
+	}
+	
+	@Post("/observacao/visualiza")
+	public void visualizar(Observacao observacao){
+		observacao.setUsuario(user.getUser());
+		result.include("teste" , dao.buscaObs(observacao));
 	}
 
 }
